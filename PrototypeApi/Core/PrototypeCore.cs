@@ -35,5 +35,13 @@ namespace PrototypeApi.Core
             }
             return characterList;
         }
+        public List<SpeciesAppeared> GetSpecies()
+        {
+            List<string> characterList = new List<string>();
+            List<SpeciesAppeared> speciesList = dataAccess.GetSpecies().ToList();
+            var mostAppreadCount = speciesList.Max(s => s.AppearedCount);
+            var longest = speciesList.Where(s => s.AppearedCount == mostAppreadCount);
+            return longest.ToList();
+        }
     }
 }

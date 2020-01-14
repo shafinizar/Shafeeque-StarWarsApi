@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrototypeApi.Core;
+using PrototypeApi.CustomModel;
 
 namespace PrototypeApi.Controllers
 {  
@@ -29,6 +30,13 @@ namespace PrototypeApi.Controllers
         public List<string> GetMostAppearedPerson()
         {
             return prototypeCore.GetMostAppearedPerson();
+        }
+
+        [HttpGet]
+        [Route("api/Prototype/GetSpecies")]
+        public List<SpeciesAppeared> GetSpecies()
+        {
+            return prototypeCore.GetSpecies();
         }
     }
 }

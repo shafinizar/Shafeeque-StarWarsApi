@@ -13,5 +13,6 @@ namespace PrototypeApi.DataAccess
     {
         IEnumerable<Films> GetAllFilms();
         IEnumerable<PeopleAppeared> GetMostAppearedPerson();
+        IEnumerable<SpeciesAppeared> GetSpecies();
     }
 }

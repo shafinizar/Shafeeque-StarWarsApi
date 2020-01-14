@@ -46,5 +46,22 @@ namespace PrototypeTest.UniTest
             var personName = controller.GetMostAppearedPerson();            
             Assert.IsType<List<string>>(personName);
         }
+
+        [Fact]
+        public void GetSpecies()
+        {
+            var appearedList = A.CollectionOfFake<SpeciesAppeared>(10);
+            appearedList[0].SpeciesName = "Name 1";
+            appearedList[0].SpeciesId = 1;
+            appearedList[0].AppearedCount = 3;
+            appearedList[0].NumberOfCharacter = 2;
+            appearedList[1].SpeciesName = "Name 1";
+            appearedList[1].SpeciesId = 1;
+            appearedList[1].AppearedCount = 5;
+            appearedList[1].NumberOfCharacter = 2;
+            A.CallTo(() => dataAccess.GetSpecies()).Returns(appearedList);
+            var personName = controller.GetSpecies();
+            Assert.IsType<List<SpeciesAppeared>>(personName);
+        }
     }
 }

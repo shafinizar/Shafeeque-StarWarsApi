@@ -45,5 +45,33 @@ namespace PrototypeApi.DataAccess
                 throw;
             }
         }
+
+        public IEnumerable<SpeciesAppeared> GetSpecies()
+        {
+            try
+            {
+
+                var query = from s in dbContext.Species
+                            join fs in dbContext.FilmsSpecies on s.Id equals fs.SpeciesId
+                            select new { s.Id, s.Name } into ap
+                            group ap by new { ap.Id, ap.Name } into g
+                            select new SpeciesAppeared() { SpeciesId = g.Key.Id, SpeciesName = g.Key.Name, AppearedCount = g.Count() };
+
+                var result = from s in query
+                             join sp in dbContext.SpeciesPeople on s.SpeciesId equals sp.SpeciesId
+                             select new {s.SpeciesId, s.SpeciesName,s.AppearedCount,sp.PeopleId} into ap
+                             group ap by new { ap.SpeciesId, ap.SpeciesName, ap.AppearedCount } into g
+                             select new SpeciesAppeared() { SpeciesId = g.Key.SpeciesId, SpeciesName = g.Key.SpeciesName, 
+                                 AppearedCount = g.Key.AppearedCount, NumberOfCharacter = g.Count()};
+
+                return result.AsEnumerable<SpeciesAppeared>();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

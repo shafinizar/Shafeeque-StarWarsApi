@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrototypeApi.CustomModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,5 +10,6 @@ namespace PrototypeApi.Core
     {
         string GetLongestOpeningCrawlMovie();
         List<string> GetMostAppearedPerson();
+        List<SpeciesAppeared> GetSpecies();
     }
 }
